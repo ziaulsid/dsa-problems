@@ -1,19 +1,11 @@
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.Arrays;
 
 public class KthLargestElement {
 
     public int findKthLargest(int[] nums, int k) {
 
-        List<Integer> list = new ArrayList<>();
+        Arrays.sort(nums);
 
-        for(int i : nums){
-            list.add(i);
-        }
-        Collections.sort(list);
-
-        return list.get(list.size() - k);
-
+        return nums[nums.length - k];
     }
 }
