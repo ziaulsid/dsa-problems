@@ -15,7 +15,6 @@ public class ProductArrayExceptSelf {
 
     public int[] productExceptSelf(int[] nums) {
         
-        //  [1,2,3,4]
         int length = nums.length;
         int[] left = new int[length];
         
