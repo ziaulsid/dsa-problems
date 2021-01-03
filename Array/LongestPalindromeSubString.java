@@ -1,6 +1,6 @@
 public class LongestPalindromeSubString {
 
-    /*Time Complexity : O(n^2)*/
+    /*Time Complexity : O(n^3)*/
     /*This solution won't work in LeetCode or any other coding platforms*/
     public static String longestPalindrome(String s) {
 
@@ -43,6 +43,37 @@ public class LongestPalindromeSubString {
             right--;
         }
         return true;
+    }
+
+    /*Time Complexity : O(n^2)*/
+    /*This solution is the most optimized solution with constant space*/
+    public String longestPalindromeOptimized(String s) {
+
+        StringBuilder maxPalindrome = new StringBuilder();
+        //String maxPalindrome = "";
+
+        for(int i=0; i<s.length(); i++){
+
+            StringBuilder s1 = isPalindrome(s,i,i);
+            StringBuilder s2 = isPalindrome(s,i,i+1);
+            if(s1.length() > s2.length() && s1.length() > maxPalindrome.length()) maxPalindrome = s1;
+            else if(s2.length() > s1.length() && s2.length() > maxPalindrome.length()) maxPalindrome = s2;
+        }
+        return maxPalindrome.toString();
+    }
+
+    public static StringBuilder isPalindrome(String s, int low, int high) {
+
+        StringBuilder sb = new StringBuilder();
+
+        while (low >= 0 && high < s.length() && s.charAt(low) == s.charAt(high)){
+
+            low--;
+            high++;
+        }
+        sb.append(s.substring(low+1, high));
+
+        return sb;
     }
 
     public static void main(String[] args) {
