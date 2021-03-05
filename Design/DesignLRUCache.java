@@ -1,6 +1,7 @@
 import java.util.LinkedHashMap;
 import java.util.Map;
-
+/*The eviction policy is provided by the LinkedHashMap class itself. All we need to do is override removeEldestEntry(). This method is called before every put operation and 
+If this method returns true the last recently used entry is deleted*/
 class LRUCache extends LinkedHashMap<Integer, Integer> {
 
     private int capacity;
