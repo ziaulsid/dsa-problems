@@ -1,4 +1,4 @@
-class Solution {
+class CountIemsMatchingARule {
     public int countMatches(List<List<String>> items, String ruleKey, String ruleValue) {
         
         int count = 0;
