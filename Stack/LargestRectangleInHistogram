@@ -1,0 +1,48 @@
+class LargestRectangleInHistogram {
+        public int largestRectangleArea(int[] heights) {
+        int size = heights.length;
+        int[] leftMax = new int[size];
+        int[] rightMax = new int[size];
+        int[] area = new int[size];
+
+        Stack<Pair<Integer,Integer>> stack = new Stack<>();
+        //Pre-process left max array
+        for(int i=0; i<size; i++){
+            if(stack.isEmpty()) leftMax[i] = -1;
+            else if(stack.peek().getKey() < heights[i]) leftMax[i] = stack.peek().getValue();
+            else{
+                while(!stack.isEmpty() && stack.peek().getKey() >= heights[i]) {
+                    stack.pop();
+                }
+                if(stack.isEmpty()) leftMax[i] = -1;
+                else leftMax[i] = stack.peek().getValue();
+            }
+            stack.push(new Pair(heights[i], i));
+        }
+
+        Stack<Pair<Integer,Integer>> stack2 = new Stack<>();
+        //Pre-process right max array
+        for(int i=size-1; i>=0; i--){
+            if(stack2.isEmpty()) rightMax[i] = size;
+            else if(stack2.peek().getKey() < heights[i]) rightMax[i] = stack2.peek().getValue();
+            else{
+                while(!stack2.isEmpty() && stack2.peek().getKey() >= heights[i]) {
+                    stack2.pop();
+                }
+                if(stack2.isEmpty()) rightMax[i] = size;
+                else rightMax[i] = stack2.peek().getValue();
+            }
+            stack2.push(new Pair(heights[i], i));
+        }
+
+        for(int i=0; i<size; i++){
+            area[i] = heights[i] * (rightMax[i] - leftMax[i] - 1);
+        }
+        int maxArea = 0;
+        for(int i=0; i<size; i++){
+            maxArea = Math.max(maxArea, area[i]);
+        }
+
+        return maxArea;
+    }
+}
